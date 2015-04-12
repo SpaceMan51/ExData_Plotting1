@@ -7,8 +7,9 @@ twodaypowerdata <- read.table(twodaypowerdatafile, header= TRUE)
 twodaypowerdata$DateTime <- as.POSIXct(paste(twodaypowerdata$Date, twodaypowerdata$Time), format="%d/%m/%Y %H:%M:%S")
 
 ##Plot histogram to show frequency of Global_active_power values
+png('plot1.png',width=480, height=480)
 hist(twodaypowerdata$Global_active_power, main="Global Active Power", col="red", xlab="Global Active Power (kilowatts)")
 
 ##create PNG
-dev.copy(png, file="plot1.png")
+#dev.copy(png, file="plot1.png")
 dev.off()

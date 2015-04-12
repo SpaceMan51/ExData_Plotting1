@@ -7,8 +7,9 @@ twodaypowerdata <- read.table(twodaypowerdatafile, header= TRUE)
 twodaypowerdata$DateTime <- as.POSIXct(paste(twodaypowerdata$Date, twodaypowerdata$Time), format="%d/%m/%Y %H:%M:%S")
 
 ##Plot with no xlab but with ylab
+png('plot2.png',width=480, height=480)
 with(twodaypowerdata, plot(DateTime, Global_active_power, type = "l", ylab="Global Active Power (kilowatts)", xlab=""))
 
 ##create PNG
-dev.copy(png, file="plot2.png")
+#dev.copy(png, file="plot2.png")
 dev.off()
