@@ -7,22 +7,22 @@ twodaypowerdata <- read.table(twodaypowerdatafile, header= TRUE)
 twodaypowerdata$DateTime <- as.POSIXct(paste(twodaypowerdata$Date, twodaypowerdata$Time), format="%d/%m/%Y %H:%M:%S")
 
 ##Plot with 4 different plots
+png('plot4.png',width=480, height=480)
 par(mfrow=c(2,2))
 
-with(twodaypowerdata, plot(DateTime, Global_active_power, type = "l", ylab="Global Active Power", xlab=""))
+plot(Global_active_power ~ DateTime, twodaypowerdata, type = "l", ylab="Global Active Power", xlab="")
 
-with(twodaypowerdata, plot(DateTime, Voltage, type = "l", ylab="Voltage", xlab="datetime"))
+plot(Voltage ~ DateTime, twodaypowerdata, type = "l", ylab="Voltage", xlab="datetime")
 
-with(twodaypowerdata, plot(DateTime, Sub_metering_1, type="l", xlab="", ylab="Energy sub metering"))
-with(twodaypowerdata, lines(DateTime, Sub_metering_2, type = "l", col="red"))
-with(twodaypowerdata, lines(DateTime, Sub_metering_3, type = "l", col="blue"))
-legend("topright", cex=0.75, lwd=3.0, pt.cex=1.0, pch="-", bty="n",
+plot(Sub_metering_1 ~ DateTime, twodaypowerdata, type="l", xlab="", ylab="Energy sub metering")
+lines(Sub_metering_2 ~ DateTime, twodaypowerdata, type = "l", col="red", yaxt = "n")
+lines(Sub_metering_3 ~ DateTime, twodaypowerdata, type = "l", col="blue", yaxt = "n")
+legend("topright", lty=1, cex=0.75, lwd=3.0, pt.cex=1.0, pch="-", bty="n",
        col=c("black", "red", "blue"),
        c("Sub_metering_1","Sub_metering_2", "Sub_metering_3"))
 
-with(twodaypowerdata, plot(DateTime, Global_reactive_power, type = "l", ylab="Global_reactive_power", xlab="datetime"))
-
+plot(Global_reactive_power ~ DateTime, twodaypowerdata, type = "l", ylab="Global_reactive_power", xlab="datetime")
 
 ##create PNG
-dev.copy(png, file="plot4.png")
+
 dev.off()
